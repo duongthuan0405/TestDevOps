@@ -13,6 +13,37 @@ pipeline {
                 }
             }
         }
+
+        stage('Containerize') {
+            steps {
+                echo 'Containerizing application...'
+                dir('test-dev-ops') {
+                    withCredentials([
+                        usernamePassword(
+                            credentialsId: 'docker-hub', 
+                            usernameVariable: 'DOCKERHUB_USERNAME', 
+                            passwordVariable: 'DOCKERHUB_PASSWORD'
+                        )
+                    ]) {
+                        bat "docker login -u %DOCKERHUB_USERNAME% -p %DOCKERHUB_PASSWORD%"
+                        bat "docker build -t %DOCKERHUB_USERNAME%/test-dev-ops:latest ."
+                        bat "docker push %DOCKERHUB_USERNAME%/test-dev-ops:latest"
+                    }
+                }
+
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: 'docker-hub', 
+                        usernameVariable: 'DOCKERHUB_USERNAME', 
+                        passwordVariable: 'DOCKERHUB_PASSWORD'
+                    )
+                ]) {
+                    bat "docker login -u %DOCKERHUB_USERNAME% -p %DOCKERHUB_PASSWORD%"
+                    bat "docker pull %DOCKERHUB_USERNAME%/test-dev-ops:latest"
+                    bat "docker run -d -p 3000:3000 --name test-dev-ops %DOCKERHUB_USERNAME%/test-dev-ops:latest"
+                }
+            }
+        }
         
     }
 

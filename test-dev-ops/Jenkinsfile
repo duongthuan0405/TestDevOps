@@ -4,8 +4,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'echo "Building the project..."'
-                sh 'echo "Build completed."'
+                bat 'echo "Building the project..."'
+                bat 'echo "Build completed."'
             }
         }
     }

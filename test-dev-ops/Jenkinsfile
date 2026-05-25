@@ -6,11 +6,11 @@ pipeline {
             steps {
                 echo 'Building and testing...'
 
-                bat 'dir'
-
-                bat 'npm install'
-                bat 'npm run build'
-                echo 'run npm test if you have tests'
+                dir('test-dev-ops') {
+                    bat 'npm install'
+                    bat 'npm run build'
+                    echo 'run npm test if you have tests'
+                }
             }
         }
         

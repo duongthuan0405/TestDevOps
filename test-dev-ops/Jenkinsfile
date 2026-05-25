@@ -8,5 +8,25 @@ pipeline {
                 bat 'echo "Build completed."'
             }
         }
+
+        stage('Test') {
+            steps {
+                bat 'echo "Testing the application..."'
+                bat 'echo "Testing completed."'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                bat 'echo "Deploying the application..."'
+                bat 'echo "Deployment completed."'
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'This will always run after the stages.'
+        }
     }
 }

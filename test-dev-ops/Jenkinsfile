@@ -2,48 +2,21 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Build and test') {
             steps {
-                bat 'echo "1. Building the project..."'
-                bat 'echo "1. Build completed."'
-            }
+                echo 'Building and testing...'
 
-            post {
-                always {
-                    echo 'This will always run after the Build stage.'
-                }
+                bat 'npm install'
+                bat 'npm run build'
+                echo 'run npm test if you have tests'
             }
         }
-
-        stage('Test') {
-            post {
-                always {
-                    echo 'This will always run after the Test stage.'
-                }
-            }
-            steps {
-                bat 'echo "1. Testing the application..."'
-                bat 'echo "1. Testing completed."'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                bat 'echo "1. Deploying the application..."'
-                bat 'echo "1.Deployment completed."'
-            }
-
-            post {
-                always {
-                    echo 'This will always run after the Deploy stage.'
-                }
-            }
-        }
+        
     }
 
     post {
         always {
-            echo 'This will always run after the stages.'
+            echo 'Cleaning up workspace...'
         }
     }
 }

@@ -16,7 +16,7 @@ ENV NODE_ENV=production
 ENV PORT=3000
 
 COPY --from=builder --chown=node:node /app/public/ ./public/
-COPY --from=builder --chown=node:node /app/.next/ ./next/
+COPY --from=builder --chown=node:node /app/.next/ ./.next/
 
 USER node
 EXPOSE 3000

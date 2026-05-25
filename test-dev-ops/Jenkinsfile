@@ -4,22 +4,54 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                bat 'echo "Building the project..."'
-                bat 'echo "Build completed."'
+                bat 'echo "1. Building the project..."'
+                bat 'echo "1. Build completed."'
+            }
+
+            post {
+                always {
+                    echo 'This will always run after the Build stage.'
+                }
+            }
+
+            steps {
+                bat 'echo "2. Building the project..."'
+                bat 'echo "2. Build completed."'
             }
         }
 
         stage('Test') {
+            post {
+                always {
+                    echo 'This will always run after the Test stage.'
+                }
+            }
             steps {
-                bat 'echo "Testing the application..."'
-                bat 'echo "Testing completed."'
+                bat 'echo "1. Testing the application..."'
+                bat 'echo "1. Testing completed."'
+            }
+
+            steps {
+                bat 'echo "2. Testing the application..."'
+                bat 'echo "2. Testing completed."'
             }
         }
 
         stage('Deploy') {
             steps {
-                bat 'echo "Deploying the application..."'
-                bat 'echo "Deployment completed."'
+                bat 'echo "1. Deploying the application..."'
+                bat 'echo "1.Deployment completed."'
+            }
+
+            steps {
+                bat 'echo "2. Deploying the application..."'
+                bat 'echo "2. Deployment completed."'
+            }
+
+            post {
+                always {
+                    echo 'This will always run after the Deploy stage.'
+                }
             }
         }
     }

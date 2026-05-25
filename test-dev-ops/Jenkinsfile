@@ -40,7 +40,7 @@ pipeline {
                 ]) {
                     bat "docker login -u %DOCKERHUB_USERNAME% -p %DOCKERHUB_PASSWORD%"
                     bat "docker pull %DOCKERHUB_USERNAME%/test-dev-ops:latest"
-                    bat "docker run -d -p 3000:3000 --name test-dev-ops %DOCKERHUB_USERNAME%/test-dev-ops:latest"
+                    bat "docker run -d -p 3000:3000 %DOCKERHUB_USERNAME%/test-dev-ops:latest"
                 }
             }
         }

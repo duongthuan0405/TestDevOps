@@ -6,6 +6,8 @@ pipeline {
             steps {
                 echo 'Building and testing...'
 
+                bat 'ls'
+
                 bat 'npm install'
                 bat 'npm run build'
                 echo 'run npm test if you have tests'

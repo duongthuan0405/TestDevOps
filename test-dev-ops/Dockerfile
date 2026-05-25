@@ -23,4 +23,4 @@ COPY --from=builder /app/node_modules ./node_modules
 USER node
 EXPOSE 3000
 
-ENTRYPOINT ["node", "server.js"]
+ENTRYPOINT ["npm", "start"]
